@@ -27,70 +27,79 @@
 
 			<script type="text/javascript">
 
-			// Set wins and guesses starting point
-			var wins = 0;
-			var guesses = 10;
+			// Do I need to use a different function to enter game versus input for looped into letterGuess?
 
-			// Array to store the word to be guessed
-			var word = ["d", "u", "b", "a", "i"];
+				// Validate number of guesses is less than or equal to 0 
+				while (guesses > 0) {
 
-			// Empty array for already used letters
-			var usedLetter = [];
+					// Initialize wins and guesses
+					var wins = 0;
+					var guesses = 10;
 
-			// Only loop the game if less than 10 guesses
-			for(i=10; i=0; i--;) {
+					// Set array to store the word to be guessed
+					// Create object (key value pair for word variable and string)
+					var word = ["d", "u", "b", "a", "i"];
 
-				// Enter game if any key is pressed
-				document.onkeyup = function(event) {
+					// Set array to store the second word to be guessed
+					// var word2 = ["h","e","l","l","o"];
+
+					// Set empty array to insert already used letters
+					// Do I need to initialize w/ someting to get initial loop to run?
+					var usedLetter = [];
+
+					// Enter game if any key is pressed
+					document.onkeyup = function(event) {
 
 					// Accept user input
 					var letterGuess = event.key;
 
-						// Compare new letter to used letter
+					// Testing
+					console.log(letterGuess);
+
+						// Check if new letter doesn't match previously used letter 
+						// Use indexOf js function (usedLetter.indexOf())
 						for(i=0; i<usedLetter.length; i++) {
-							// Compare letterGuess to usedLetter array
 							if(letterGuess === usedLetter[i]) {
-								// Decrement by 1
+
+								// If the new letter does match, return to while loop to start again
+
+							} else {
+
+								// If new letter does NOT match, then push new letter into usedLetter array
+								usedLetter.push(letterGuess);
+
+								// Decrement guesses by 1
 								guesses--;
-							}
 
-							// Pass userGuess into compareGuess function
-							compareGuess(letterGuess);
+								// Display new guesses and new letter used
+								// HTML/CSS
 
-							// Compare userGuess (letter) to the word (letter in the string)
-							function compareGuess(letter) {
-								for(i=0; i<word.length; i++) {
-									if(letterGuess === word[i]) {
-										usedLetter.push(letterGuess);
-										console.log(usedLetter);
-									}
-								}
-							}
-						}
-					}
-				}		
-			
-			}
+								// Check to see if new letter matches a letter in the word
+								compareGuess(letterGuess);
 
-					
+								// Remove function -- just call this function in here	
+								function compareGuess(letter) {
+									for(i=0; i<word.length; i++) {
+										if(letterGuess === word[i]) {
 
-/*
-				var html = 
-					"<section><div><p id=""start"">Press any key to get started!</p></div>"
-					+
-					"<div><p id=""wins"">Wins</p></div>"
-					+
-					"<div><p id=""guesses"">Number of guesses remaining</p></div>"
-					+
-					"<div><p id=""used"">Letters already guessed</p></div></section>"
+											// Replace dashes with correct letter in correct location
+											// HTML CSS
+										
+										} else {
 
-			}
-*/
+											// If the new letter does match, return to while loop to start again
 
-	
+										} 
+									} // Exit compareGuess for loop
+								} // Exit compareGuess function
+							} // Exit usedLetter else statement
+						} // Exit of usedLetter loop
+					} // Exit function(event) 
+				}// Exit of while loop
 
-		</script>
+// After while loop has repeated 10 times OR if correct word is guessed
 
+			</script>
 	</body>
 </html>
 
