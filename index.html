@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+		<title>Hangman Two-Thousand and Late</title>
+	</head>
+
+	<body>
+	
+		<section>
+			<div>
+				<p id="start">Press any key to get started!</p>
+			</div>
+
+			<div>
+				<p id="wins">Wins</p>
+			</div>
+
+			<div>
+				<p id="guesses">Number of guesses remaining</p>
+			</div>
+
+			<div>
+				<p id="used">Letters already guessed</p>
+			</div>
+		</section>
+
+			<script type="text/javascript">
+
+			// Set wins and guesses starting point
+			var wins = 0;
+			var guesses = 10;
+
+			// Array to store the word to be guessed
+			var word = ["d", "u", "b", "a", "i"];
+
+			// Empty array for already used letters
+			var usedLetter = [];
+
+			// Only loop the game if less than 10 guesses
+			for(i=10; i=0; i--;) {
+
+				// Enter game if any key is pressed
+				document.onkeyup = function(event) {
+
+					// Accept user input
+					var letterGuess = event.key;
+
+						// Compare new letter to used letter
+						for(i=0; i<usedLetter.length; i++) {
+							// Compare letterGuess to usedLetter array
+							if(letterGuess === usedLetter[i]) {
+								// Decrement by 1
+								guesses--;
+							}
+
+							// Pass userGuess into compareGuess function
+							compareGuess(letterGuess);
+
+							// Compare userGuess (letter) to the word (letter in the string)
+							function compareGuess(letter) {
+								for(i=0; i<word.length; i++) {
+									if(letterGuess === word[i]) {
+										usedLetter.push(letterGuess);
+										console.log(usedLetter);
+									}
+								}
+							}
+						}
+					}
+				}		
+			
+			}
+
+					
+
+/*
+				var html = 
+					"<section><div><p id=""start"">Press any key to get started!</p></div>"
+					+
+					"<div><p id=""wins"">Wins</p></div>"
+					+
+					"<div><p id=""guesses"">Number of guesses remaining</p></div>"
+					+
+					"<div><p id=""used"">Letters already guessed</p></div></section>"
+
+			}
+*/
+
+	
+
+		</script>
+
+	</body>
+</html>
+
+
