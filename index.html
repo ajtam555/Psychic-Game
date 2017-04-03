@@ -27,25 +27,70 @@
 
 			<script type="text/javascript">
 
-			// Do I need to use a different function to enter game versus input for looped into letterGuess?
+				/*************** VARIABLES ******************/
 
-				// Validate number of guesses is less than or equal to 0 
-				while (guesses > 0) {
+				// Initialize wins and guesses
+				var wins = 0;
+				var guesses = 10;
 
-					// Initialize wins and guesses
-					var wins = 0;
-					var guesses = 10;
+				// Set empty array to insert already used letters
+				var usedLetter = [];
 
-					// Set array to store the word to be guessed
-					// Create object (key value pair for word variable and string)
-					var word = ["d", "u", "b", "a", "i"];
+				/**************** OBJECTS *******************/
+				// Object that stores two words in an array (words for user games)
+				var guessWord = {
+					"word" : ["dubai", "hello"]
+				};
 
-					// Set array to store the second word to be guessed
-					// var word2 = ["h","e","l","l","o"];
+				/**************** FUNCTIONS *****************/
 
-					// Set empty array to insert already used letters
-					// Do I need to initialize w/ someting to get initial loop to run?
-					var usedLetter = [];
+				// Function to check if new letter is already used
+				// Use indexOf function (usedLetter.indexOf())
+				function checkUsedLetter(letter) {
+					for(i=0; i<usedLetter.length; i++) {
+						if(letterGuess === usedLetter[i]) {
+
+							// If the new letter does match, return to while loop to start again
+
+						} else {
+
+							// If new letter does NOT match, then push new letter into usedLetter array
+							usedLetter.push(letterGuess);
+
+							// Decrement guesses by 1
+							guesses--;
+
+							// Display new guesses and new letter used
+							// HTML/CSS
+
+							// Call checkWord function to check letter against word
+							checkWord(letterGuess);
+
+						}
+					} 
+				} 		
+
+
+				// Function to check if new letter matches any letters in the word
+				function checkWord(letter) {
+					for(i=0; i<word.length; i++) {
+						if(letterGuess === word[i]) {
+
+							// Replace dashes with correct letter in correct location
+							// HTML CSS
+						
+						} else {
+
+							// If the new letter does match, return to while loop to start again
+
+						} 
+					} 
+				} 
+
+
+				/**************** HANGMAN GAME ***************/
+
+				while(guesses > 0) {
 
 					// Enter game if any key is pressed
 					document.onkeyup = function(event) {
@@ -53,49 +98,15 @@
 					// Accept user input
 					var letterGuess = event.key;
 
+					// Call checkUsedLetter to check if new letter is already used
+					// checkUsedLetter will call checkWord (only if letter not used)
+					checkUsedLetter(letterGuess);
+
 					// Testing
 					console.log(letterGuess);
 
-						// Check if new letter doesn't match previously used letter 
-						// Use indexOf js function (usedLetter.indexOf())
-						for(i=0; i<usedLetter.length; i++) {
-							if(letterGuess === usedLetter[i]) {
-
-								// If the new letter does match, return to while loop to start again
-
-							} else {
-
-								// If new letter does NOT match, then push new letter into usedLetter array
-								usedLetter.push(letterGuess);
-
-								// Decrement guesses by 1
-								guesses--;
-
-								// Display new guesses and new letter used
-								// HTML/CSS
-
-								// Check to see if new letter matches a letter in the word
-								compareGuess(letterGuess);
-
-								// Remove function -- just call this function in here	
-								function compareGuess(letter) {
-									for(i=0; i<word.length; i++) {
-										if(letterGuess === word[i]) {
-
-											// Replace dashes with correct letter in correct location
-											// HTML CSS
-										
-										} else {
-
-											// If the new letter does match, return to while loop to start again
-
-										} 
-									} // Exit compareGuess for loop
-								} // Exit compareGuess function
-							} // Exit usedLetter else statement
-						} // Exit of usedLetter loop
-					} // Exit function(event) 
-				}// Exit of while loop
+					} 
+				}
 
 // After while loop has repeated 10 times OR if correct word is guessed
 
