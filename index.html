@@ -36,61 +36,67 @@
 				// Set empty array to insert already used letters
 				var usedLetter = [];
 
+				// Set the word that needs to be guessed
+				var word = "dubai";
+
 				/**************** OBJECTS *******************/
 				// Object that stores two words in an array (words for user games)
+				
+				/*
 				var guessWord = {
 					"word" : ["dubai", "hello"]
 				};
+				*/
 
 				/**************** FUNCTIONS *****************/
 
-				// Function to check if new letter is already used
-				// Use indexOf function (usedLetter.indexOf())
-				function checkUsedLetter(letter) {
-					for(i=0; i<usedLetter.length; i++) {
-						if(letterGuess === usedLetter[i]) {
+				// Function to check if new letter against letters stored in usedLetter array
+				function checkUsedLetter(check1) {
 
-							// If the new letter does match, return to while loop to start again
+					var a = usedLetter.indexOf(check1);
+					console.log(a);
 
-						} else {
+					if(a === -1) {
+						
+						// Check new letter against the word also
+						checkWord(check1);
 
-							// If new letter does NOT match, then push new letter into usedLetter array
-							usedLetter.push(letterGuess);
+						// Decrement guesses by 1
+						guesses--;
 
-							// Decrement guesses by 1
-							guesses--;
+						console.log(usedLetter);
+						console.log(guesses);
 
-							// Display new guesses and new letter used
-							// HTML/CSS
+					}
 
-							// Call checkWord function to check letter against word
-							checkWord(letterGuess);
-
-						}
-					} 
-				} 		
+					else if(a !== -1) {
+						// If new letter matches letters stored in usedLetter array, do not decrement
+						// Exit to repeat game
+						
+					}
+				}
 
 
 				// Function to check if new letter matches any letters in the word
-				function checkWord(letter) {
-					for(i=0; i<word.length; i++) {
-						if(letterGuess === word[i]) {
+				function checkWord(check2) {
 
-							// Replace dashes with correct letter in correct location
-							// HTML CSS
-						
-						} else {
+					var b = word.indexOf(check2);
+					console.log(b);
 
-							// If the new letter does match, return to while loop to start again
-
-						} 
-					} 
-				} 
+					// Push letter into usedLetter, if new letter not stored in usedLetter array AND if new letter does NOT match any letters in word
+					if(b === -1) {
+						usedLetter.push(check2);
+					
+					} else if (b !== -1) {
+						// Exit to game
+					}		
+					
+				}
 
 
 				/**************** HANGMAN GAME ***************/
 
-				while(guesses > 0) {
+				if(guesses > 0) {
 
 					// Enter game if any key is pressed
 					document.onkeyup = function(event) {
@@ -102,13 +108,11 @@
 					// checkUsedLetter will call checkWord (only if letter not used)
 					checkUsedLetter(letterGuess);
 
-					// Testing
-					console.log(letterGuess);
-
 					} 
+				} else {
+
 				}
 
-// After while loop has repeated 10 times OR if correct word is guessed
 
 			</script>
 	</body>
