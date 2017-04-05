@@ -1,0 +1,36 @@
+body {
+  background: #000;
+}
+#image {
+  background: url("http://i.imgur.com/KZa2oNy.png") no-repeat center top;
+  background-size: 250px;
+  height: 250px;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+	border-style: dotted;
+	border-color: white;
+	display: inline-block;
+	height: 500px;
+	width: 250px;
+	color: white;
+	text-align: center;
+	font-family: 'Press Start 2P', cursive;
+}
+
+#pic {
+	content: url(http://i.imgur.com/cOhtHzp.jpg);
+}
+
+p span 
+{
+    display: block;
+}

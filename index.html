@@ -3,27 +3,36 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Hangman Two-Thousand and Late</title>
+	
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
 	</head>
 
 	<body>
-	
-		<section>
-			<div>
-				<p id="start">Press any key to get started!</p>
+		<div id="container">
+			<div id="image"></div>
+				<table>
+					<tbody>
+						<tr>
+							<td id="pic"></td>
+							<td id="display">
+								<p>Press any key to get started!</p>
+								<br>
+								<p><span>Wins:</span></p>
+								<br>
+								<p><span>Current Word</span></p>
+								<br>
+								<p><span></span></p>
+								<br>
+								<p><span>Number of Guesses Remaining:</span></p>
+								<br>
+								<p><span>Letters Already Guessed:</span></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-
-			<div>
-				<p id="wins">Wins</p>
-			</div>
-
-			<div>
-				<p id="guesses">Number of guesses remaining</p>
-			</div>
-
-			<div>
-				<p id="used">Letters already guessed</p>
-			</div>
-		</section>
 
 			<script type="text/javascript">
 
@@ -31,22 +40,29 @@
 
 				// Initialize wins and guesses
 				var wins = 0;
-				var guesses = 10;
+				var guesses = 12;
 
 				// Set empty array to insert already used letters
 				var usedLetter = [];
 
+				// Set empty array to insert correct letters
+				var guessStatus = [];
+
+				// Initialize counter to 0
+				var counter = 0;
+
+				// Set empty dashes 
+				var wordDash = "";
+
 				// Set the word that needs to be guessed
-				var word = "dubai";
+				var word = "zack";
 
 				/**************** OBJECTS *******************/
 				// Object that stores two words in an array (words for user games)
-				
-				/*
-				var guessWord = {
-					"word" : ["dubai", "hello"]
-				};
-				*/
+
+				//var currentWord = {
+				//	"word" : ["dubai", "hello"]
+				//};
 
 				/**************** FUNCTIONS *****************/
 
@@ -54,18 +70,16 @@
 				function checkUsedLetter(check1) {
 
 					var a = usedLetter.indexOf(check1);
-					console.log(a);
+					console.log(a + " is var a");
 
+					// New letter does NOT match letter already used
 					if(a === -1) {
 						
 						// Check new letter against the word also
 						checkWord(check1);
 
-						// Decrement guesses by 1
-						guesses--;
-
-						console.log(usedLetter);
-						console.log(guesses);
+						console.log(usedLetter + " letter used");
+						//console.log(guesses);
 
 					}
 
@@ -74,44 +88,90 @@
 						// Exit to repeat game
 						
 					}
-				}
-
+				}				
 
 				// Function to check if new letter matches any letters in the word
 				function checkWord(check2) {
 
 					var b = word.indexOf(check2);
-					console.log(b);
+					console.log(b + " is var b");
 
-					// Push letter into usedLetter, if new letter not stored in usedLetter array AND if new letter does NOT match any letters in word
+					// New letter does NOT match letters in the word
 					if(b === -1) {
+						
+						// Push into usedLetter array
 						usedLetter.push(check2);
+
+						// Decrement guesses by 1
+						guesses--;
+
+						console.log(usedLetter + " IS pushed into usedLetter")
 					
-					} else if (b !== -1) {
-						// Exit to game
-					}		
-					
+					// New letter does correctly matches letters in the word
+					} else if(b !== -1) {
+						console.log(usedLetter + " is NOT pushed into usedLetter")
+
+						// Keep track of correctly guessed letters
+						guessStatus.push(check2);
+
+						// remove dashes as we go along
+
+						// Count number of times pushed array
+						counter++;
+
+						// Add to wins if counter number equals length number
+						if(counter === word.length) {
+							wins++;
+
+							document.getElementById("#image").url("http://i.imgur.com/5uUdjag.jpg");
+						}
+					}
 				}
 
+				function dashes() {
+					for(dash=0; dash<word.length; dash++) {
+						// Dashes
+					}
+				}
+					
+				
 
 				/**************** HANGMAN GAME ***************/
 
-				if(guesses > 0) {
+				for (var i = 10; i >= 0; i--) {
+
+					// Add dashes to display 
+					dashes();
 
 					// Enter game if any key is pressed
 					document.onkeyup = function(event) {
 
-					// Accept user input
+					// Accept user input and store into letterGuess
 					var letterGuess = event.key;
 
 					// Call checkUsedLetter to check if new letter is already used
 					// checkUsedLetter will call checkWord (only if letter not used)
 					checkUsedLetter(letterGuess);
+					console.log(guesses +" is variable guesses");
+					console.log(i + " is variable i");
+
+					var html = 
+
+					"<p>Press any key to get started!</p>" +
+					"<br>" +
+					"<p><span>Wins: " + wins + "</span></p>" +
+					"<p><span>Current Word " + "</span></p>" +
+					"<br>" +
+					//"<p><span>" "</span></p>" +
+					"<br>" +
+					"<p><span>Number of Guesses Remaining: " + guesses + "</span></p>" +
+					"<br>" +
+					"<p><span>Letters Already Guessed: " + usedLetter + "</span></p>";
+
+					document.querySelector("#display").innerHTML = html;
 
 					} 
-				} else {
-
-				}
+				} 
 
 
 			</script>
