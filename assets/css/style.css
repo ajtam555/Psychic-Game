@@ -27,7 +27,7 @@ td {
 }
 
 #pic {
-	content: url(http://i.imgur.com/cOhtHzp.jpg);
+	background-image: url(assets/images/zackYoung.jpg);
 }
 
 p span 
